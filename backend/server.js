@@ -4,6 +4,8 @@ const mysql = require('mysql');
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 const { expressjwt: expressJWT } = require('express-jwt');
+const cors = require('cors');
+
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -15,6 +17,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
+app.use(cors());
+
 
 // const connection = mysql.createConnection({
 //   host: 'localhost',
