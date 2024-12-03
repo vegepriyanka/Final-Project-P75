@@ -73,7 +73,7 @@ const Summary = (props) => {
     } else {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const hostname = window.location.hostname;
-      const resp = await axios.get(`https://final-project-p75-backend.onrender.com:3000/api/reportdata`);
+      const resp = await axios.get(`https://final-project-p75-backend.onrender.com/api/reportdata`);
       if (resp && resp.status === 200) {
         const data = resp.data ?? [];
         const summaryData = data.reduce((acc, item) => {
