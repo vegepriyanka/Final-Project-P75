@@ -22,7 +22,7 @@ const Report = (props) => {
       }
     } else {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const resp = await axios.get('http://localhost:3001/api/summarydata');
+      const resp = await axios.get('https://final-project-p75-backend.onrender.com:3000/api/summarydata');
       console.log(resp);
       if (resp && resp.status === 200) {
         let data = resp.data ?? [];
