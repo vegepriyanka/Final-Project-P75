@@ -37,7 +37,7 @@ const LogIn = (props) => {
       password: password,
     };
 
-    const url = 'http://localhost:3001/api/login';
+    const url = 'https://final-project-p75-backend.onrender.com/api/login';
     try {
       const resp = await axios.post(url, data).catch((err) => {
         console.log(err);
