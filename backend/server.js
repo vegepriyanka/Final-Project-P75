@@ -10,7 +10,7 @@ const path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'https://final-project-p75-frontend.onrender.com/');
   res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
   next();
 });
@@ -30,7 +30,7 @@ const connection = mysql.createConnection({
   database: process.env.DB,
 });
 
-const PORT = 3001;
+const PORT = 3000;
 
 const secretKey = 'secretKey';
 const jwtMw = expressJWT({
