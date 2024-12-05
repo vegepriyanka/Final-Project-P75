@@ -11,7 +11,7 @@ const DashBoard = () => {
     "NVIDIA's cutting-edge tools, such as GPU offloading and LM Studio, enable efficient local hosting of language models, balancing quality and performance. These innovations empower businesses to deliver tailored, AI-driven solutions, accelerating India's digital transformation.";
 
   const techStack =
-    'The project is constructed utilizing a contemporary MERN-like tech stack, which combines MySQL for the database layer to effectively manage structured data, Node.js and Express.js for creating a scalable and reliable back-end API, and React for the front-end user experience. With reusable components, React offers a dynamic and responsive user experience, and Node.js and Express.js offer a smooth server-side environment for managing middleware, routing, and API requests. The relational database management system, MySQL, guarantees dependable data storage and sophisticated querying features. React implmentation of Chart.js is used to create the dynamic charts on summary and report pages.';
+    'The project is constructed utilizing a contemporary MERN-like tech stack, which combines MySQL for the database layer to effectively manage structured data, Node.js and Express.js for creating a scalable and reliable back-end API, and React for the front-end user experience. With reusable components, React offers a dynamic and responsive user experience, and Node.js and Express.js offer a smooth server-side environment for managing middleware, routing, and API requests. The relational database management system, MySQL, guarantees dependable data storage and sophisticated querying features. React implementation of Chart.js is used to create the dynamic charts on summary and report pages.';
   return (
     <>
       <Grid
