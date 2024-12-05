@@ -28,7 +28,7 @@ app.use(cors());
 // });
 
 const connection = mysql.createConnection({
-  host: 'sql5.freemysqlhosting.net',
+  host: process.env.HOST,
   user: process.env.USERNAME,
   password: process.env.PASSWORD,
   database: process.env.DB,
