@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
-import { Grid, ListItemText, Typography, makeStyles } from '@material-ui/core';
+import {
+  Box,
+  Grid,
+  ListItemText,
+  Typography,
+  makeStyles,
+  LinearProgress
+} from '@material-ui/core';
 import PieChart from './PieChart';
 import { jwtDecode } from 'jwt-decode';
 import List from '@mui/material/List';
@@ -57,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 const Summary = (props) => {
   const classes = useStyles();
   const [summaryData, setSummaryData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadData();
@@ -73,7 +81,11 @@ const Summary = (props) => {
     } else {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const hostname = window.location.hostname;
-      const resp = await axios.get(`https://final-project-p75-backend.onrender.com/api/reportdata`);
+      const resp = await axios
+        .get(`https://final-project-p75-backend.onrender.com/api/reportdata`)
+        .finally(() => {
+          setIsLoading(false);
+        });
       if (resp && resp.status === 200) {
         const data = resp.data ?? [];
         const summaryData = data.reduce((acc, item) => {
@@ -90,6 +102,9 @@ const Summary = (props) => {
       <div className={classes.container}>
         <NavBar />
         <div className={classes.pieChartContainer}>
+          {isLoading && (
+              <LinearProgress />
+          )}
           <PieChart
             summaryData={summaryData}
             aria-label='Pie chart showing the input summary of models'
@@ -97,38 +112,45 @@ const Summary = (props) => {
           />
         </div>
         <div className={classes.listContainer}>
-        <Grid>
-          <List component='div'>
-            <ListItem>
-              <ListItemText
-                primary='Description'
-                secondary='Figure 2 presents the distribution of English-language data sources used to pre-train Nemotron-4 15B. These include a blend of web documents, news articles, scientific papers, books, and other curated datasets.'
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary='Key Insights'
-                secondary={
-                  <ul>
-                    <li>
-                      70% of the model's pre-training dataset is composed of English-language data, emphasizing the model's focus on general-purpose applications.
-                    </li>
-                    <li>
-                      The data composition reflects an effort to include diverse domains, ensuring robust performance across tasks requiring different types of knowledge.
-                    </li>
-                    <li>
-                      This curated dataset contributes to the model's competitive edge in English language benchmarks and downstream evaluations.
-                    </li>
-                  </ul>
-                }
-              />
-            </ListItem>
-          </List>
-        </Grid>
+          <Grid>
+            <List component='div'>
+              <ListItem>
+                <ListItemText
+                  primary='Description'
+                  secondary='Figure 2 presents the distribution of English-language data sources used to pre-train Nemotron-4 15B. These include a blend of web documents, news articles, scientific papers, books, and other curated datasets.'
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                  primary='Key Insights'
+                  secondary={
+                    <ul>
+                      <li>
+                        70% of the model's pre-training dataset is composed of
+                        English-language data, emphasizing the model's focus on
+                        general-purpose applications.
+                      </li>
+                      <li>
+                        The data composition reflects an effort to include
+                        diverse domains, ensuring robust performance across
+                        tasks requiring different types of knowledge.
+                      </li>
+                      <li>
+                        This curated dataset contributes to the model's
+                        competitive edge in English language benchmarks and
+                        downstream evaluations.
+                      </li>
+                    </ul>
+                  }
+                />
+              </ListItem>
+            </List>
+          </Grid>
         </div>
         <div className={classes.footer}>
           <Typography variant='body1'>
-            For more insights on large language models and their application in Indian languages, check out the following:
+            For more insights on large language models and their application in
+            Indian languages, check out the following:
           </Typography>
           <Typography variant='body1'>
             <a

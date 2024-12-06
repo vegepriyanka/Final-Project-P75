@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Grid, TextField, Button } from '@material-ui/core';
+import { Grid, TextField, Button, CircularProgress } from '@material-ui/core';
 import NavBar from './NavBar';
 import axios from 'axios';
 
 const LogIn = (props) => {
   const [userName, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
     if (props.logOut) {
@@ -31,7 +32,7 @@ const LogIn = (props) => {
 
   const onSubmit = async () => {
     console.log(userName, password);
-
+    setIsLoading(true);
     const data = {
       username: userName,
       password: password,
@@ -49,10 +50,13 @@ const LogIn = (props) => {
         const token = resp.data.token;
         localStorage.setItem('jwtToken', token);
         props.checkToken();
+        setIsLoading(false);
       } else {
+        setIsLoading(false);
         alert('Invalid creditenals');
       }
     } catch (e) {
+      setIsLoading(false);
       alert('Something went wrong');
       console.error(e);
     }
@@ -71,6 +75,7 @@ const LogIn = (props) => {
         alignItems='center'
         style={{ minWidth: '200vh' }}
       >
+        {isLoading && <CircularProgress />}
         <TextField
           label='Username'
           placeholder='Enter username'
